@@ -3,23 +3,15 @@ package sel90days.workout.day1;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
-
 import org.openqa.selenium.support.ui.Select;
-
-
-
-
-
-
 public class Hp {
 public static void main(String[] args) throws InterruptedException {
-			//Launch the URL
-	System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
-	ChromeDriver driver=new ChromeDriver();
+		    //Launch the URL
+	            System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
+		    ChromeDriver driver=new ChromeDriver();
 		
 		    driver.get("https://store.hp.com/in-en/default");
 		    
@@ -91,7 +83,10 @@ public static void main(String[] args) throws InterruptedException {
 	
 		    //Print the First resulting Product Name and Price
 		    System.out.println("First Resulting Product Name:"+driver.findElementByXPath("(//a[@class='product-item-link'])[1]").getText());
-		    System.out.println("First Resulting MRP is:"+driver.findElementByXPath("(//span[@class='price'])[2]").getText());
+		    String firstprice=driver.findElementByXPath("(//span[@class='price'])[2]").getText();
+		    String fp=firstprice.replaceAll("\\D","");
+		    int ftPrice=Integer.parseInt(fp);
+		    System.out.println("First Resulting MRP is:"+ftPrice);
 
 		    //Click On Add To Cart
 		    Thread.sleep(10000);
