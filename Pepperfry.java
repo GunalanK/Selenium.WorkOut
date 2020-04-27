@@ -17,10 +17,9 @@ public class Pepperfry {
 	public static void main(String[] args) throws InterruptedException, IOException {
 		
 		    //Launch the URL //Go to PEPPERFRY.COM
-	        System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
-	       /* System.setProperty("webdriver.chrome.silentOutput","true");*/
-	        ChromeDriver driver=new ChromeDriver();
-	        JavascriptExecutor js = (JavascriptExecutor) driver;
+	            System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
+	            System.setProperty("webdriver.chrome.silentOutput","true");
+	            ChromeDriver driver=new ChromeDriver();
 		    driver.get("https://www.pepperfry.com/");
 		    
 		    //Maxmize the window
@@ -81,9 +80,9 @@ public class Pepperfry {
 		    String wishListCount=driver.findElementByXPath("(//span[@class='count_alert'])[2]").getText();
 		    int wlc=Integer.parseInt(wishListCount);
 		    if (Integer.parseInt(wishListCount) == 2) {
-				System.out.println("No.of.items count present in Wishlist are correct");
+				System.out.println("Selected Items are successfully added in Wishlist");
 			} else {
-				System.out.println("No.of.items count present in Wishlist are not correct");
+				System.out.println("Selected Items are not successfully added in Wishlist");
 				
 			//Navigate to Wishlist
 			 
