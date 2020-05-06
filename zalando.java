@@ -25,7 +25,7 @@ public class zalando {
 		//Get the Alert text and print it
 		Thread.sleep(10000);
 	    Alert alert=driver.switchTo().alert();
-	    System.out.println(alert.getText());
+	     System.out.println("Alert message:"+alert.getText());
 	    alert.accept();
 		    
 		//Maxmize the window
