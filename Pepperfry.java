@@ -12,14 +12,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
+
 public class Pepperfry {
 
 	public static void main(String[] args) throws InterruptedException, IOException {
 		
 		    //Launch the URL //Go to PEPPERFRY.COM
-	            System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
-	            System.setProperty("webdriver.chrome.silentOutput","true");
-	            ChromeDriver driver=new ChromeDriver();
+	        System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
+	      System.setProperty("webdriver.chrome.silentOutput","true");
+	        ChromeDriver driver=new ChromeDriver();
+	        JavascriptExecutor js = (JavascriptExecutor) driver;
 		    driver.get("https://www.pepperfry.com/");
 		    
 		    //Maxmize the window
@@ -29,6 +31,9 @@ public class Pepperfry {
 		    driver.manage().timeouts().implicitlyWait(60,TimeUnit.SECONDS);
 		    
 		    Thread.sleep(10000);
+		    try {
+		    	driver.findElementByXPath("(//span[@class='wewidgeticon we_close icon-large'])").click();
+		    }catch(Exception e){}
 		    try
 		    {
 		    	driver.findElementByXPath("(//a[@class='popup-close'])[5]").click();
@@ -72,55 +77,73 @@ public class Pepperfry {
 		    
 		    //Add "Nakshatra Cute Mettalic Red Aluminium Cooker 2 Ltr" to WishList
 		    Thread.sleep(10000);
-		    WebElement AddToWL2=driver.findElementByXPath("(//a[@id='clip_wishlist_'])[5]");
-		    AddToWL2.click();
+		    driver.findElementByXPath("//a[@data-productname='Nakshatra Cute Metallic Red Aluminium Cooker 2 Ltr']").click();
+		   
 		    
 		    //Verify the number of items in WIshlist 
-		    Thread.sleep(6000);
-		    String wishListCount=driver.findElementByXPath("(//span[@class='count_alert'])[2]").getText();
-		    int wlc=Integer.parseInt(wishListCount);
-		    if (Integer.parseInt(wishListCount) == 2) {
-				System.out.println("Selected Items are successfully added in Wishlist");
-			} else {
-				System.out.println("Selected Items are not successfully added in Wishlist");
-				
-			//Navigate to Wishlist
-			 
-			driver.findElementByXPath("//div[@class='wishlist_bar']/a").click();
+		    /*String  = driver.findElementByXPath("//a[@data-tooltip='Wishlist']/following::span[@class='count_alert'][1]").getText(); 
+
+			int wishListNumber = Integer.parseInt(actualWishlist); */
+
 			
-			 Thread.sleep(6000);
-			 
+		    Thread.sleep(10000);
+			if((driver.findElementByXPath("//a[@data-tooltip='Wishlist']/following::span[@class='count_alert'][1]").getText()).equalsIgnoreCase("2")) { 
+
+				System.out.println("All the items which are selected is added to Wishlist"); 
+
+			} else { 
+
+				System.out.println("All the items which are selected is not added to Wishlist");
+
+			}
+
+
 			
-			//Move Pressure Cooker only to Cart from Wishlist
-			WebElement pC=driver.findElementByXPath("(//a[@class='addtocart_icon'])[2]");
-			pC.click();
+
+			// Navigating to Wishlist 
+
+			driver.findElementByXPath("//a[@data-tooltip='Wishlist']").click(); 
+
+			Thread.sleep(3000); 
+
+
+	
+			// Move Pressure Cooker only to Cart from Wishlist
+
+			driver.findElementByXPath("//a[@data-tooltip='Compact view']").click();
+
+			Thread.sleep(10000);
+
+			driver.findElementByXPath("//a[text()='Nakshatra Cute Metallic Red Aluminium Cooker 2 Ltr By...']/following::a[@class='addtocart_icon']").click(); 
+
+			/*driver.findElementByXPath("//a[text()='Nakshatra Cute Metallic Red Aluminium Cooker 2 Ltr By...']/following::a[@class='addtocart_icon']").click(); */
+
+			Thread.sleep(2000); 
+
+			
+
+			driver.findElementById("mini-usercart-tab").click(); 
 			
 			//Check for the availability for PinCode 600128
+			Thread.sleep(6000);
 			driver.findElementByXPath("//input[@class='srvc_pin_text']").sendKeys("600128");
 			driver.findElementByXPath("//a[@class='check_available']").click();
 			
 			//Click Proceed to Pay Securely
+			Thread.sleep(6000);
 			driver.findElementByXPath("//a[text()='Proceed to pay securely ']").click();
 			
 			//Click Proceed to Pay
 			driver.findElementByXPath("(//a[text()='PLACE ORDER'])[1]").click();
 			
 			//Capture the Screenshot of the item under Order item
-			driver.findElementByXPath("(//div[@class='nCheckout__accrodian-header-left'])[1]").click();
+			Thread.sleep(6000);
+			driver.findElementByXPath("//span[text()='ORDER SUMMARY']").click();
 			File screenshotAs =driver.getScreenshotAs(OutputType.FILE);
 			File dst=new File("./snaps/pepperfry.png");
 			FileUtils.copyFile(screenshotAs, dst);
 			
 			//Close the Browser
 			driver.close();
+			}}
 			
-			
-			//
-			
-
-			}
-		    
-		    
-	}
-
-}
