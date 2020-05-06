@@ -81,11 +81,6 @@ public class Pepperfry {
 		   
 		    
 		    //Verify the number of items in WIshlist 
-		    /*String  = driver.findElementByXPath("//a[@data-tooltip='Wishlist']/following::span[@class='count_alert'][1]").getText(); 
-
-			int wishListNumber = Integer.parseInt(actualWishlist); */
-
-			
 		    Thread.sleep(10000);
 			if((driver.findElementByXPath("//a[@data-tooltip='Wishlist']/following::span[@class='count_alert'][1]").getText()).equalsIgnoreCase("2")) { 
 
@@ -111,17 +106,9 @@ public class Pepperfry {
 			// Move Pressure Cooker only to Cart from Wishlist
 
 			driver.findElementByXPath("//a[@data-tooltip='Compact view']").click();
-
 			Thread.sleep(10000);
-
 			driver.findElementByXPath("//a[text()='Nakshatra Cute Metallic Red Aluminium Cooker 2 Ltr By...']/following::a[@class='addtocart_icon']").click(); 
-
-			/*driver.findElementByXPath("//a[text()='Nakshatra Cute Metallic Red Aluminium Cooker 2 Ltr By...']/following::a[@class='addtocart_icon']").click(); */
-
 			Thread.sleep(2000); 
-
-			
-
 			driver.findElementById("mini-usercart-tab").click(); 
 			
 			//Check for the availability for PinCode 600128
